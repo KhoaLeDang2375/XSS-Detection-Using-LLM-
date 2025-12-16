@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo XSS Attack - Security Education</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- CONTROL PANEL -->
+    <nav class="control-panel">
+        <div class="brand">
+            <i class="fa-solid fa-shield-virus"></i>
+            <div class="brand-text">
+                <h3>XSS DEFENSE</h3>
+                <span>Hệ thống phòng thủ AI</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <!-- Toggle Switch -->
+            <div class="toggle-group">
+                <span class="label">Chế độ bảo vệ:</span>
+                <label class="switch">
+                    <input type="checkbox" id="safety-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span id="status-text" class="status-badge status-off">TẮT</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Clear Button -->
+            <button onclick="clearDB()" class="btn-clear">
+                <i class="fa-solid fa-trash-can"></i> Xóa Database
+            </button>
+        </div>
+    </nav>
+
+    <!-- NỘI DUNG CHÍNH -->
+    <main class="main-container">
+
+        <!-- Cột trái: Bài viết -->
+        <section class="post-card">
+            <div class="image-wrapper">
+                <img src="../static/VinhHaLong.jpg" alt="Ha Long Bay" class="post-img">
+            </div>
+            <div class="post-content">
+                <h1>Vịnh Hạ Long - Tuyệt tác thiên nhiên</h1>
+                <p class="meta"><strong>Đăng bởi Nhóm 22</strong></p>
+                <p class="desc">Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ tây vịnh Bắc Bộ tại khu vực biển Đông Bắc
+                    Việt Nam, bao gồm vùng biển đảo của thành phố Hạ Long thuộc tỉnh Quảng Ninh.
+                    <br>Vịnh Hạ Long được Unesco nhiều lần công nhận là Di sản thiên nhiên của Thế giới với hàng nghìn
+                    hòn đảo được làm nên bởi tạo hoá kỳ vĩ và sống động. Vịnh Hạ Long có phong cảnh tuyệt đẹp nên nơi
+                    đây là một điểm du lịch rất hấp dẫn với du khách trong nước và quốc tế.
+                    <br><br>Hãy để lại cảm nghĩ của bạn bên dưới nhé!
+                </p>
+            </div>
+        </section>
+
+        <!-- Comment -->
+        <section class="comment-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-comments"></i> Bình luận</h2>
+                <span class="comment-count">Live Demo</span>
+            </div>
+
+            <!-- Ô nhập liệu -->
+            <div class="input-area">
+                <div class="avatar">
+                    <img src="../static/Avatar.png" alt="User">
+                </div>
+                <div class="input-wrapper">
+                    <textarea id="comment-input"
+                        placeholder="Nhập bình luận... (Thử nhập thẻ <script>alert(1)</script>)"></textarea>
+                    <button onclick="postComment()" class="btn-send">
+                        <i class="fa-solid fa-paper-plane"></i> Gửi
+                    </button>
+                </div>
+            </div>
+
+            <!-- Danh sách comment -->
+            <div id="comment-list" class="comment-list">
+                <!-- Comment  -->
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
