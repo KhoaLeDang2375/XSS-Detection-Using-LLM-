@@ -10,26 +10,49 @@
 
 ## 📖 Giới thiệu
 
-Dự án này xây dựng một hệ thống Web demo có khả năng phát hiện và ngăn chặn các cuộc tấn công **Cross-Site Scripting (XSS)** trong thời gian thực bằng cách sử dụng mô hình ngôn ngữ (RoBERTa) đã được tinh chỉnh.
+Dự án này xây dựng một hệ thống Web demo có khả năng phát hiện và ngăn chặn các cuộc tấn công **Cross-Site Scripting (XSS)** trong thời gian thực bằng cách sử dụng mô hình ngôn ngữ **RoBERTa** đã được tinh chỉnh.
 
 Hệ thống được thiết kế để chạy trên máy local hoặc deploy lên server, với giao diện web thuận tiện cho việc kiểm tra và minh họa cách mô hình phát hiện payload XSS.
 
 ---
 
+## 🎥 Video Demo
+
+👉 **Demo hệ thống phát hiện XSS (YouTube):**
+[https://youtu.be/QTv_XW1y7Is](https://youtu.be/QTv_XW1y7Is)
+
+Video minh họa cách hệ thống hoạt động, giao diện web, và cách mô hình RoBERTa phát hiện cũng như chặn payload XSS trong thời gian thực.
+
+---
+
+## 📊 Kaggle Notebooks (Huấn luyện & Xử lý dữ liệu)
+
+Dự án sử dụng các notebook trên Kaggle cho quá trình xử lý dữ liệu và fine-tuning mô hình:
+
+* 🔁 **Tăng cường dữ liệu (Data Augmentation):**
+  [https://www.kaggle.com/code/thoandanh/t-ng-c-ng-d-li-u-xss](https://www.kaggle.com/code/thoandanh/t-ng-c-ng-d-li-u-xss)
+
+* 🎯 **Fine-tuning mô hình RoBERTa cho XSS Detection:**
+  [https://www.kaggle.com/code/thoandanh/xss-detection](https://www.kaggle.com/code/thoandanh/xss-detection)
+
+Các notebook này bao gồm các bước tiền xử lý dữ liệu, tăng cường dữ liệu XSS/Benign, huấn luyện và đánh giá mô hình.
+
+---
+
 ## ✨ Tính năng chính
 
-- 🕵️ **Phát hiện payload XSS** thông qua mô hình học sâu (RoBERTa).
-- 🛡️ **Chặn và báo cáo** các payload độc hại trước khi lưu trữ.
-- ⚡ **Dùng thử real-time** qua giao diện web.
-- 📁 **Dễ cài đặt**: hướng dẫn rõ ràng để chạy local với virtual environment.
+* 🕵️ **Phát hiện payload XSS** thông qua mô hình học sâu (RoBERTa).
+* 🛡️ **Chặn và báo cáo** các payload độc hại trước khi lưu trữ.
+* ⚡ **Dùng thử real-time** qua giao diện web.
+* 📁 **Dễ cài đặt**: hướng dẫn rõ ràng để chạy local với virtual environment.
 
 ---
 
 ## 🔧 Yêu cầu (Prerequisites)
 
-- Python 3.8+
-- pip
-- (Tùy chọn) Docker
+* Python 3.8+
+* pip
+* (Tùy chọn) Docker
 
 ---
 
@@ -44,7 +67,8 @@ cd XSS-Detection-Using-LLM-
 
 2. Tạo virtual environment và cài dependencies:
 
-Windows (PowerShell):
+**Windows (PowerShell):**
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate
@@ -61,17 +85,28 @@ $env:FLASK_ENV = "development"
 flask run
 ```
 
-Mở trình duyệt tại: http://127.0.0.1:5000
+Mở trình duyệt tại: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
-## 📦 Model (PLACEHOLDER)
+## 📦 Model
 
-**LINK DRIVE MODEL:** (https://drive.google.com/drive/folders/1PlhW0fxMgA1gZFXYmrsGxEQDbaJZ2_ir?usp=sharing)
+**LINK GOOGLE DRIVE MODEL:**
+[https://drive.google.com/drive/folders/1PlhW0fxMgA1gZFXYmrsGxEQDbaJZ2_ir?usp=sharing](https://drive.google.com/drive/folders/1PlhW0fxMgA1gZFXYmrsGxEQDbaJZ2_ir?usp=sharing)
 
-Hướng dẫn: tải toàn bộ file model từ link Drive phía trên và đặt vào folder `saved_model/` trong repository (ví dụ: `saved_model/config.json`, `saved_model/tokenizer.json`, `saved_model/model.safetensors`, ...). Nếu bạn lưu model vào đường dẫn khác, đặt biến môi trường `MODEL_PATH` tương ứng.
+### Hướng dẫn sử dụng model
 
-Ví dụ trên Windows (PowerShell):
+* Tải toàn bộ file model từ link Google Drive phía trên
+* Đặt các file vào thư mục `saved_model/` trong repository, ví dụ:
+
+  * `saved_model/config.json`
+  * `saved_model/tokenizer.json`
+  * `saved_model/model.safetensors`
+
+Nếu bạn lưu model ở đường dẫn khác, hãy thiết lập biến môi trường `MODEL_PATH`.
+
+**Ví dụ (Windows PowerShell):**
+
 ```powershell
 $env:MODEL_PATH = "./saved_model"
 ```
@@ -80,44 +115,45 @@ $env:MODEL_PATH = "./saved_model"
 
 ## 🔎 Sử dụng & API
 
-- Trang web demo: `GET /` (root)
-- Endpoint dự đoán (ví dụ): `POST /predict` với payload JSON: `{ "input": "<user input>" }` => trả về kết quả phân loại và score.
+* 🌐 **Trang web demo:** `GET /`
+* 🤖 **API dự đoán:** `POST /predict`
+
+**Payload mẫu:**
+
+```json
+{
+  "input": "<script>alert('XSS')</script>"
+}
+```
+
+API trả về nhãn dự đoán (XSS / Benign) kèm theo score xác suất.
 
 ---
 
 ## 🛠️ Cấu hình (Config)
 
-- `requirements.txt` — chứa các thư viện cần cài.
-- `config.py` — một số cấu hình (DB, secret keys, v.v.).
-- `saved_model/` — nơi đặt model đã tải xuống.
+* `requirements.txt` — danh sách thư viện Python cần thiết.
+* `config.py` — cấu hình hệ thống (nếu có).
+* `saved_model/` — thư mục chứa mô hình đã fine-tune.
 
 ---
 
 ## ✅ Kiểm tra (Testing)
 
-- Có thể kiểm tra bằng cách gửi request qua Postman / curl tới `/predict`.
-- Thực hiện test thủ công trên giao diện web để xác nhận hệ thống chặn payload XSS.
+* Kiểm tra API bằng **Postman** hoặc **curl** thông qua endpoint `/predict`.
+* Thử nhập trực tiếp payload trên giao diện web để xác nhận hệ thống chặn XSS.
 
 ---
 
 ## 🤝 Đóng góp (Contributing)
 
 1. Fork repository
-2. Tạo branch feature: `git checkout -b feature/your-feature`
+2. Tạo branch mới: `git checkout -b feature/your-feature`
 3. Commit thay đổi: `git commit -m "Mô tả thay đổi"`
-4. Push lên branch và tạo Pull Request.
+4. Push và tạo Pull Request
 
 ---
 
-## 📝 License
+## 📚 Ghi chú
 
-Ghi rõ license của bạn ở đây (ví dụ MIT). Nếu bạn không chắc, tôi có thể thêm file `LICENSE` sau.
-
----
-
-## ☎️ Liên hệ
-
-Nếu bạn cần giúp điều chỉnh README hoặc muốn tôi chèn **link Drive model** vào chỗ chừa sẵn, nói cho tôi biết link hoặc cho phép tôi chèn giúp.
-
----
-
+Dự án mang tính học thuật và demo cho mục đích nghiên cứu – giảng dạy môn **Nhập môn Bảo đảm và An ninh Thông tin**. Không khuyến nghị sử dụng trực tiếp trong môi trường production mà không qua kiểm thử và đánh giá bảo mật bổ sung.
