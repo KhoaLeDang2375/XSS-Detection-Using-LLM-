@@ -4,7 +4,7 @@
 ![Flask](https://img.shields.io/badge/Framework-Flask-green)
 ![AI Model](https://img.shields.io/badge/Model-RoBERTa-orange)
 
-> Đồ án môn học An Toàn Thông Tin - Demo khả năng phòng thủ XSS bằng mô hình ngôn ngữ lớn (LLM).
+> Nhập môn bảo đảm và an ninh thông tin - IE105.Q11 - Demo khả năng phòng thủ XSS bằng mô hình ngôn ngữ lớn (LLM).
 
 ---
 
